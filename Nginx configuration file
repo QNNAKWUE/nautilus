@@ -1,6 +1,19 @@
 server{
-       listen 80;
-       listen [::]:80;
-       root /var/www/172.105.20.120;
-       index index.html;
+        listen 80;
+        listen [::]:80;
+
+        root /var/www/172.105.20.120;
+        index index.html;
+
+        ssl on;
+        ssl_certificate /etc/nginx/ssl/yhostname.crt;
+        ssl_certificate_key /etc/nginx/ssl/yhostname.key;
+
+        ssl_session_timeout 5m;
+
+        ssl_protocols TLSv1 TLSv1.1 TLSv1.2;
+        ssl_ciphers "HIGH:!aNULL:!MD5 or HIGH:!aNULL:!MD5:!3DES";
+        ssl_prefer_server_ciphers on;
+
+
 }
