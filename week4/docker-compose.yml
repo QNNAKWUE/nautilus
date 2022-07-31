@@ -1,0 +1,45 @@
+services:
+  nest:
+    build: ./nestjs-rest-example
+    restart: always
+    ports:
+      - 5002:5000
+    env_file:
+      - ./nestjs-rest-example/.env
+    links:
+      - database
+
+  database:
+    image: mysql:5.7
+    restart: always
+    ports:
+      - 3306:3306
+    env_file:
+      - ./nestjs-rest-example/.env
+    volumes:
+      - ~/database/nest:/var/lib/mysql
+
+  
+  db:
+    image: postgres
+    volumes:
+      - ./postgres_data:/var/lib/postgres/data
+    environment:
+      - POSTGRES_DB=djangosample
+      - POSTGRES_USER=sampleuser
+      - POSTGRES_PASSWORD=samplesecret
+
+  django:
+    build:
+      context: .
+      dockerfile: ./django-sample-for-docker-compose/compose/django/Dockerfile
+    volumes:
+      - ./django-sample-for-docker-compose:/app/
+    command: ["./manage.py", "runserver", "0:8000"]
+    environment:
+     - DJANGO_DB_HOST=db
+    depends_on:
+      - db
+    restart: always
+    ports:
+      - 8000:8000
