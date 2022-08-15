@@ -1,3 +1,6 @@
 Infrastructure as Code (IaC) is the process of managing and provisioning the complete IT infrastructure (comprises both physical and virtual machines) 
 using machine-readable definition files. It is a software engineering approach toward operations. It helps in automating 
 the complete data center by using programming scripts.
+
+Infrastructure as code enables you to quickly set up your complete infrastructure by running a script. You can do that for every environment,
+from development to production, passing through staging, QA, and more. IaC can make the entire software development lifecycle more efficient.
